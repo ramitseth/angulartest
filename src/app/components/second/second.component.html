@@ -1,0 +1,49 @@
+<mat-card class="second-card" appearance="outlined">
+  <mat-card-header>
+    <mat-card-title>Camera Compatibility Checker</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <form [formGroup]="cameraForm" (ngSubmit)="onSubmit()">
+      <div class="slider-div">
+        <mat-label for="light-level"
+          >Range of Light Level (
+          {{ this.cameraForm.controls.minLightLevel.value }}
+          - {{ this.cameraForm.controls.maxLightLevel.value }} )
+        </mat-label>
+        <mat-slider
+          class="slider-input"
+          id="light-level"
+          min="0"
+          max="500"
+          showTickMarks
+        >
+          <input matSliderStartThumb formControlName="minLightLevel" />
+          <input matSliderEndThumb formControlName="maxLightLevel" />
+        </mat-slider>
+      </div>
+      <div class="slider-div">
+        <mat-label for="subject-distance"
+          >Range of Subject Distance (
+          {{ this.cameraForm.controls.minSubjectDistance.value }}
+          - {{ this.cameraForm.controls.maxSubjectDistance.value }} )
+        </mat-label>
+        <mat-slider
+          class="slider-input"
+          id="subject-distance"
+          min="0"
+          max="100"
+          showTickMarks
+        >
+          <input matSliderStartThumb formControlName="minSubjectDistance" />
+          <input matSliderEndThumb formControlName="maxSubjectDistance" />
+        </mat-slider>
+      </div>
+      <div class="button-submit">
+        <button mat-flat-button type="submit">Submit</button>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>
+
+<h1 *ngIf="result">Camera requirements are compatible with {{this.cameraName}}</h1>
+<h1 *ngIf="!result && this.cameraForm.valid">Camera requirements are not compatible with any camera</h1>
